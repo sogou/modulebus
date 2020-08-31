@@ -1,0 +1,20 @@
+
+String aptConf = 'annotationProcessor'
+def isKotlinProject = project.plugins.hasPlugin("kotlin-android")
+if (isKotlinProject){
+    if (!project.plugins.hasPlugin("kotlin-kapt")){
+        project.plugins.apply("kotlin-kapt")
+    }
+    aptConf = 'kapt'
+    println(isKotlinProject)
+    println(aptConf)
+}
+
+String compileConf = 'implementation'
+
+project.dependencies.add(compileConf,
+        "com.sogou.module:modulebus:$MODULE_BUS_VERSION")
+project.dependencies.add(compileConf,
+        "com.sogou.module:annotationProcessor:$BUS_ANNOTATION_VERSION")
+project.dependencies.add(aptConf,
+        "com.sogou.module:annotationProcessor:$BUS_ANNOTATION_VERSION")

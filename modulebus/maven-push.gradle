@@ -1,0 +1,82 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties') != null){
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories {
+        mavenDeployer {
+
+            beforeDeployment { deployment -> signing.signPom(deployment) }
+
+            snapshotRepository(url: MAVEN_SNAPSHOT_URL) {
+                authentication(userName: properties.getProperty("NEXUS_USERNAME"), password: properties.getProperty("NEXUS_PASSWORD"))
+            }
+
+            repository(url: MAVEN_URL) {
+                authentication(userName: properties.getProperty("NEXUS_USERNAME"), password: properties.getProperty("NEXUS_PASSWORD"))
+            }
+
+            //文件发布到下面目录
+//            repository(url: uri('../repo-local'))
+
+            pom.project {
+                name MODULE_BUS_NAME
+                url POM_URL
+                version MODULE_BUS_VERSION
+                artifactId MODULE_BUS_NAME
+                groupId GROUP_ID
+                packaging 'aar'
+                description 'AnnotationProcessor For ModuleBus'
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id POM_DEVELOPER_ID                                           // #CONFIG# // your user id (you can write your nickname)
+                        name POM_DEVELOPER_NAME                                       // #CONFIG# // your user name
+                        email POM_DEVELOPER_EMAIL                               // #CONFIG# // your email
+                    }
+                }
+                scm {
+                    connection POM_GIT
+                    developerConnection POM_GIT
+                    url POM_URL
+                }
+            }
+        }
+    }
+}
