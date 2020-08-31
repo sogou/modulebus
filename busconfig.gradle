@@ -1,0 +1,15 @@
+apply plugin: 'module-bus-extensions'
+
+/*if(project.ext.has("runAsApp") && project.ext.runAsApp){
+    ext.exportInfos = [
+            [ //自动注册组件
+              'scanInterface'   : 'com.sogou.modulebus.functionbus.IExported'
+              , 'destClass'     : 'com.sogou.modulebus.functionbus.FunctionBus'
+              , 'methodCall'    : 'addFunction'
+            ]
+    ]
+
+    moduleBusConfig {
+        exportInfoList = exportInfos
+    }
+}*/

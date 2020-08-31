@@ -1,0 +1,15 @@
+apply plugin: 'groovy'
+apply from: 'maven-push.gradle'
+
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:2.2.0'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

@@ -1,0 +1,8 @@
+include ':Sample:app',
+        ':Sample:login',
+        ':Sample:profile',
+        ':Sample:base',
+        ':modulebus',
+        ':annotationProcessor',
+        ':bus-gradle-plugin',
+        ':bus-idea-plugin'

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sogou.login">
+
+    <application>
+        <activity android:name=".LoginActivity"></activity>
+        <activity
+            android:name=".LoginActivitySchema">
+            <intent-filter>
+                <!--action.VIEW和category.DEFAULT必须设置-->
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <!--如果需要浏览器支持打开，则category.BROWSABLE-->
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="login1"
+                    android:host="login"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>com.sogou.module.ideaplugin</id>
+    <name>ModuleBusNavigationPlugin</name>
+    <version>1.0</version>
+    <vendor email="zhangqiang215603@sogou-inc.com" url="http://www.sogou.com">Sogou</vendor>
+
+    <description><![CDATA[
+      组件化路由导航器.<br>
+      <em>查找路由对应的页面</em>
+      <em>查找路由对应的页面</em>
+      <em>查找路由对应的页面</em>
+      <em>查找路由对应的页面</em>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      组件化路由导航器.<br>
+      <em>查找路由对应的页面</em>
+      <em>查找路由对应的页面</em>
+      <em>查找路由对应的页面</em>
+      <em>查找路由对应的页面</em>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <codeInsight.lineMarkerProvider language="JAVA"
+            implementationClass="com.sogou.module.ideaplugin.ModuleBusNavigationPlugin"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>

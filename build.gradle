@@ -1,0 +1,67 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.41'
+
+    repositories {
+        google()
+        jcenter()
+        maven{ url rootProject.file("repo-local") }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.sogou.module:bus-gradle-plugin:1.2.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+configurations.all {
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor  0,'seconds'
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    MAVEN_URL = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    MAVEN_SNAPSHOT_URL = 'https://oss.sonatype.org/content/repositories/snapshots/'
+
+    GROUP_ID = 'com.sogou.module'
+
+    MODULE_BUS_NAME = "modulebus"
+    MODULE_BUS_VERSION = "1.2.7"
+
+    BUS_ANNOTATION_NAME = "annotationProcessor"
+    BUS_ANNOTATION_VERSION = "1.2.0"
+
+    BUS_PLUGIN_NAME = "bus-gradle-plugin"
+    BUS_PLUGIN_VERSION = "1.2.3"
+
+    POM_DEVELOPER_ID = "Sogou Browser"
+    POM_DEVELOPER_NAME = "Sogou, Inc."
+    POM_DEVELOPER_EMAIL = "seasonfif@gmail.com."
+
+    POM_URL = "https://github.com/sogou/ModuleBus"
+    POM_GIT = "https://github.com/sogou/ModuleBus.git"
+    POM_ISSUE_URL = "https://github.com/sogou/ModuleBus/issues"
+}
